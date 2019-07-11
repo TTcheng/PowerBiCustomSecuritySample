@@ -1,4 +1,7 @@
+[中文](./README_zh_CN.md)
+
 # Reporting Services Custom Security Sample for Power BI Report Server and SQL Reporting Services 2017
+
 This project contains a sample and the steps that allow you to deploy a custom security extension to SQL Reporting Services 2017 or Power BI Report Server.
 
 # Synopsis
@@ -14,7 +17,7 @@ In previous versions extensions, could rely on a common assumption that ASP.NET 
 The most generic example is accessing HttpContext.Current to read request information such as headers and cookies. In order to allow extensions to make the same decisions we introduced a new method in the extension that provides request information and is called when authenticating from the portal. 
 
 Extensions should implement the IAuthenticationExtension2 interface to leverage this. The extensions will need to implement both versions of GetUserInfo method, as is called by the reportserver context and other used in webhost process. The sample below shows one of the simple implementations for the portal where the identity resolved by the reportserver is the one used.
-  
+
 ```csharp
     public void GetUserInfo(IRSRequestContext requestContext, out IIdentity userIdentity, out IntPtr userId)
     {
@@ -114,6 +117,7 @@ Modify files in the ReportServer Folder
 	</Authentication> 
 	```
 	
+
 Note: 
 If you are running the sample security extension in a development environment that does not have a Secure Sockets Layer (SSL) certificate installed, you must change the value of the ```<UseSSL>``` element to False in the previous configuration entry. We recommend that you always use SSL when combining Reporting Services with Forms Authentication. 
 
@@ -171,7 +175,7 @@ Generate and add ```<MachineKey>``` under ```<Configuration>``` in your RSReport
 
 ```xml
 <MachineKey ValidationKey="[YOUR KEY]" DecryptionKey="[YOUR KEY]" Validation="AES" Decryption="AES" />
-``` 
+```
 
 **Check the casing of the attributes, it should be Pascal Casing as the example above**
 
@@ -192,7 +196,7 @@ In the rsreportserver.config file add following under ```<UI>```
       </PassThroughCookies>
    </CustomAuthenticationUI>
 </UI>
-``` 
+```
 
 # Automatic configuration of the sample
 

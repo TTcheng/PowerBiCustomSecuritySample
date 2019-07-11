@@ -1,4 +1,7 @@
+[英文](./README.md)
+
 # 适用于Power BI报表服务器和SQL Reporting Services 2017的Reporting Services自定义安全示例
+
 此项目包含一个示例以及允许您将自定义安全扩展部署到SQL Reporting Services 2017或Power BI Report Server的步骤。
 
 # 概述
