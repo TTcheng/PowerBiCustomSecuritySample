@@ -6,6 +6,7 @@
 
   Summary:  Demonstrates an implementation of an authentication 
             extension.
+            演示身份认证扩展的实现。
 --------------------------------------------------------------------
   This file is part of Microsoft SQL Server Code Samples.
     
@@ -65,6 +66,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
 
         /// <summary>
         /// Indicates whether a supplied username and password are valid.
+        /// 指示提供的用户名和密码是否有效。
         /// </summary>
         /// <param name="userName">The supplied username</param>
         /// <param name="password">The supplied password</param>
@@ -82,10 +84,13 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
         /// Required by IAuthenticationExtension. The report server calls the 
         /// GetUserInfo methodfor each request to retrieve the current user 
         /// identity.
+        /// 报表服务器为每个请求调用GetUserInfo方法以检索当前用户标识
         /// </summary>
         /// <param name="userIdentity">represents the identity of the current 
         /// user. The value of IIdentity may appear in a user interface and 
-        /// should be human readable</param>
+        /// should be human readable
+        /// 表示当前用户的身份。 IIdentity的值可以出现在用户界面中，并且应该是人类可读的
+        /// </param>
         /// <param name="userId">represents a pointer to a unique user identity
         /// </param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]

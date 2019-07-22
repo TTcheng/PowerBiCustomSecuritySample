@@ -45,17 +45,22 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       /// <summary>
       /// Returns a security descriptor that is stored with an individual 
       /// item in the report server database. 
+      /// 返回与报表服务器数据库中的单个项一起存储的安全描述符。
       /// </summary>
       /// <param name="acl">The access code list (ACL) created by the report 
       /// server for the item. It contains a collection of access code entry 
-      /// (ACE) structures.</param>
+      /// (ACE) structures.
+      /// 报表服务器为项创建的访问代码列表（ACL）。 它包含一组访问代码条目
+      /// </param>
       /// <param name="itemType">The type of item for which the security 
-      /// descriptor is created.</param>
+      /// descriptor is created.
+      /// 为创建安全描述符的项目类型。
+      /// </param>
       /// <param name="stringSecDesc">Optional. A user-friendly description 
       /// of the security descriptor, used for debugging. This is not stored
       /// by the report server.</param>
       /// <returns>Should be implemented to return a serialized access code 
-      /// list for the item.</returns>
+      /// list for the item.应该实现返回项目的序列化访问代码列表。</returns>
        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
       public byte[] CreateSecurityDescriptor(
          AceCollection acl, 
@@ -83,6 +88,9 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       // perform a case insensitive comparison. Ideally you would check
       // the SQL Server instance CaseSensitivity property before making
       // a case-insensitive comparison.
+      // 如果用户是管理员，则允许不受限制的访问。 由于SQL Server默认为不区分大小写，
+      // 因此我们必须执行不区分大小写的比较。 理想情况下，在进行不区分大小写的比较之前，
+      // 请检查SQL Server实例CaseSensitivity属性。
       if (0 == String.Compare(userName, m_adminUserName, true,
             CultureInfo.CurrentCulture))
         return true;
@@ -91,7 +99,8 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       foreach (AceStruct ace in acl)
       {
         // First check to see if the user or group has an access control 
-        //  entry for the item
+        //  entry for the item 
+        // 首先检查用户或组是否具有该项目的访问控制条目
         if (0 == String.Compare(userName, ace.PrincipalName, true,
            CultureInfo.CurrentCulture))
         {
@@ -149,6 +158,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       /// <summary>
       /// Indicates whether a given user is authorized to access the item 
       /// for a given catalog operation.
+      /// 判断给定用户是否有权访问给定目录操作的项目。
       /// </summary>
       /// <param name="userName">The name of the user as returned by the 
       /// GetUserInfo method.</param>
@@ -679,6 +689,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       {
          // Retrieve admin user and password from the config settings
          // and verify
+         // 从配置设置中检索管理员用户和密码并验证
          XmlDocument doc = new XmlDocument();
          doc.LoadXml(configuration);
          if (doc.DocumentElement.Name == "AdminConfiguration")

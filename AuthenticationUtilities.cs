@@ -45,6 +45,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
 
       // Method used to create a cryptographic random number that is used to
       // salt the user's password for added security
+      // 用于创建加密随机数的方法，该加密随机数用于加密用户密码以增加安全性
       internal static string CreateSalt(int size)
       {
          // Generate a cryptographic random number using the cryptographic
@@ -57,6 +58,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       }
 
       // Returns a hash of the combined password and salt value
+      // 返回密码和salt值组合的哈希值
       internal static string CreatePasswordHash(string pwd, string salt)
       {
          // Concat the raw password and salt value
@@ -70,6 +72,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
 
 
       // Stores the account details in a SQL table named UserAccounts
+      // 存储账户明细到UserAccounts的表中
       [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
       internal static void StoreAccountDetails(string userName,
          string passwordHash,
@@ -110,6 +113,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
 
       // Method that indicates whether 
       // the supplied username and password are valid
+      // 验证用户名密码是否正确
       [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
       internal static bool VerifyPassword(string suppliedUserName,
          string suppliedPassword)
@@ -162,6 +166,8 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       // illegal characters. If My Reports is enabled, illegal characters
       // will invalidate the paths created in the \Users folder. Usernames
       // should not contain the characters captured by this method.
+      // 验证用户名是否存在非法字符。如果启用了MyReports，则非法字符将使\ Users文件夹中创建的路径无效。
+      // 用户名不应包含此方法捕获的字符。
       [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.Int32.ToString")]
       internal static bool ValidateUserName(string input)
       {
@@ -173,6 +179,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
       }
 
       //Method to get the report server url using WMI
+      //使用WMI获取报表服务器URL的方法
       [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2201:DoNotRaiseReservedExceptionTypes")]
       internal static string GetReportServerUrl(string machineName, string instanceName)
       {
@@ -208,8 +215,10 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
               {
                   instance.Get();
                   //We're doing this comparison just to make sure we're validating the right instance.
+                  //我们正在进行这种比较，以确保我们正在验证正确的实例。
                   //This comparison is more reliable as we do the comparison on the instance name rather
                   //than on any other property.
+                  //这种比较更可靠，因为我们在实例名称而不是在任何其他属性上进行比较。
                   if (instanceName.ToUpper().Equals("RS_" + instance.GetPropertyValue("InstanceName").ToString().ToUpper()))
                   {
                       ManagementBaseObject outParams = (ManagementBaseObject)instance.InvokeMethod("GetReportServerUrls",
@@ -224,6 +233,7 @@ namespace Microsoft.Samples.ReportingServices.CustomSecurity
                           {
                               reportServerVirtualDirectory = urls[i];
                               //Since we only look for ReportServer URL we can safely break here as it would save one more iteration.
+                              //由于我们只查找ReportServer URL，因此可以安全地在此处中断，因为它可以再保存一次迭代。
                               break;
                           }
                       }
