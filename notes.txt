@@ -1,0 +1,13 @@
+1.执行数据库脚本（需要SQLServer）
+2.利用sn.exe生成强名称秘钥（程序.Net Framework安装目录下）
+3.编译项目（注意引用Microsoft.ReportingServices.Interfaces.dll，此文件在Powerbi服务器安装目录下）
+4.执行power shell脚本（configure.ps1）自动修改配置,注意不可重复执行，备份三个会修改的配置文件，重复执行之前需要先还原
+  也可以手动修改，参考README.md
+
+
+原理查看源代码
+AuthenticationExtension.cs
+AuthenticationUtilities.cs
+Authorization.cs
+
+核心接口 IAuthenticationExtension2
